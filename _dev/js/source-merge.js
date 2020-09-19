@@ -1,8 +1,8 @@
 // https://github.com/abdolence/x2js
 
-const webSourceFiles = [
+const krpanoSrc = [
 
-	'../_dev/src/devlib2.xml'
+	'../_dev/src/devlib2.kml'
 
 	// '../_dev/src/module_name/actions.kml',	
 	// '../_dev/src/module_name/events.kml',	

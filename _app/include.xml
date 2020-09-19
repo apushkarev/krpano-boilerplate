@@ -1,6 +1,5 @@
 <krpano>
 	
-	<include url="kml/app_web.xml%$_timestamp%" devices="!mobilevr" />
-	<include url="kml/app_vr.xml%$_timestamp%" devices="mobilevr" />
+	<include url="kml/app.xml%$_timestamp%" />
 	
 </krpano>
