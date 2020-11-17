@@ -1,16 +1,16 @@
-function getKRPano() {
-	window.krpano = document.getElementById('krpanoSWFObject');
-}
-
 function setKRPanoConsole() {
-	krpano.childNodes[1].style.top = "-1px";
-	krpano.childNodes[1].style.bottom = "0";
-	krpano.childNodes[1].style.height = "450px";
 
-	krpano.childNodes[1].childNodes[1].style.fontSize = "18px";
-	krpano.childNodes[1].childNodes[1].style.lineHeight = "1.4";
-	krpano.childNodes[1].childNodes[1].style.whiteSpace = "pre-wrap";
-	krpano.childNodes[1].childNodes[1].style.height = "470px";
+  const krpanoDOMObject = document.getElementById('krpanoSWFObject');
+
+  krpanoDOMObject.childNodes[1].style.top = "-1px";
+  krpanoDOMObject.childNodes[1].style.bottom = "0";
+  krpanoDOMObject.childNodes[1].style.height = "450px";
+
+  krpanoDOMObject.childNodes[1].childNodes[1].style.fontSize = "18px";
+  krpanoDOMObject.childNodes[1].childNodes[1].style.lineHeight = "1.4";
+  krpanoDOMObject.childNodes[1].childNodes[1].style.fontWeight = 500;
+  krpanoDOMObject.childNodes[1].childNodes[1].style.whiteSpace = "pre-wrap";
+  krpanoDOMObject.childNodes[1].childNodes[1].style.height = "470px";
 }
 
 function readURL() {
@@ -89,5 +89,30 @@ function setPageRatio(ratio) {
     pano.style.height = `${document.body.offsetWidth / ratio / document.body.offsetHeight * 100}%`;
     pano.style.marginTop = `${(document.body.offsetHeight - document.body.offsetWidth / ratio) / 2 / document.body.offsetHeight / ratio * 100}%`;
     pano.style.marginLeft = 0;
+  }
+}
+
+function addListener(element, eventName, handler) {
+
+  if (element.addEventListener) {
+    element.addEventListener(eventName, handler, false);
+  }
+  else if (element.attachEvent) {
+    element.attachEvent('on' + eventName, handler);
+  }
+  else {
+    element['on' + eventName] = handler;
+  }
+}
+
+function removeListener(element, eventName, handler) {
+  if (element.addEventListener) {
+    element.removeEventListener(eventName, handler, false);
+  }
+  else if (element.detachEvent) {
+    element.detachEvent('on' + eventName, handler);
+  }
+  else {
+    element['on' + eventName] = null;
   }
 }

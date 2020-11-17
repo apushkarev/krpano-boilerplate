@@ -1,7 +1,7 @@
 <krpano>
 	<!--
 		webvr.xml
-		- krpano 1.20.7
+		- krpano 1.20.9
 		
 		https://krpano.com/plugins/webvr/
 	-->
@@ -894,6 +894,8 @@
 		<device name="iPhone X/XS/11Pro" screen="375x812x3" size="5.85|5.33" />
 		<device name="iPhone XS/11Pro Max" screen="414x896x3" size="6.46|5.95" />
 		<device name="iPhone XR/11" screen="414x896x2" size="6.06|5.58" />
+		<device name="iPhone 12/12Pro" screen="390x844" size="6.1" />
+		<device name="iPhone 12Pro Max" screen="428x926" size="6.7" />
 		<device name="Samsung S6" ua="sm-g930" size="5.1" />
 		<device name="Samsung S6 Edge" ua="sm-g925" size="5.1" />
 		<device name="Samsung S6 Edge Plus" ua="sm-g928" size="5.7" />

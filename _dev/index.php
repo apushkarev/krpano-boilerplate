@@ -7,6 +7,12 @@
 	<meta name="apple-mobile-web-app-status-bar-style" content="black" />
 	<meta name="mobile-web-app-capable" content="yes" />
 	<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+
+	<meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate, max-age=0"/>
+	<meta http-equiv="Pragma" content="no-cache"/>
+	<meta http-equiv="Expires" content="0"/>
+	<meta http-equiv="expires" content="Tue, 01 Jan 1980 1:00:00 GMT" />
+
 	<style>
 		html { height:100%; }
 		body { height:100%; overflow:hidden; margin:0; padding:0; font-family: Lato, sans-serif; font-size:16px; color:#FFFFFF; background-color:#212426; }
@@ -15,13 +21,15 @@
 	<link rel="stylesheet" href="css/font.css?t=<?php echo time(); ?>" >
 	<link rel="stylesheet" href="css/tour.css?t=<?php echo time(); ?>" >
 
-	<script type="text/javascript" src="js/common.js?t=<?php echo time(); ?>"></script>
-	<script type="text/javascript" src="js/os.js?t=<?php echo time(); ?>"></script>
-	<script type="text/javascript" src="js/app.js?t=<?php echo time(); ?>"></script>
-	<script type="text/javascript" src="js/source-merge.js?t=<?php echo time(); ?>"></script>
+	<script type="text/javascript" src="js/boilerplate_modules/common.js?t=<?php echo time(); ?>"></script>
+	<script type="text/javascript" src="js/boilerplate_modules/os.js?t=<?php echo time(); ?>"></script>
+	<script type="text/javascript" src="js/boilerplate_modules/source-merge.js?t=<?php echo time(); ?>"></script>
 
-	<script type="text/javascript" src="js/xml2json.min.js"></script>
-	<script type="text/javascript" src="js/vkbeautify.js"></script>
+	<script type="text/javascript" src="js/boilerplate_modules/xml2json.min.js"></script>
+	<script type="text/javascript" src="js/boilerplate_modules/vkbeautify.js"></script>
+
+	<script type="text/javascript" src="js/app.js?t=<?php echo time(); ?>"></script>
+	<script type="text/javascript" src="js/sources.js?t=<?php echo time(); ?>"></script>
 
 </head>
 <body>

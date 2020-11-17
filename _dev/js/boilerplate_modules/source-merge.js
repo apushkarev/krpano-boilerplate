@@ -1,28 +1,5 @@
 // https://github.com/abdolence/x2js
 
-const krpanoSrc = [
-
-	'../_dev/src/devlib2.kml'
-
-	// '../_dev/src/module_name/actions.kml',	
-	// '../_dev/src/module_name/events.kml',	
-	// '../_dev/src/module_name/lov.kml',	
-	// '../_dev/src/module_name/objects.kml',	
-	// '../_dev/src/module_name/prototypes.kml',	
-	// '../_dev/src/module_name/structure.kml'
-];
-
-const jsSources = [
-	'../_dev/js/common.js',
-	'../_dev/js/app.js',
-	'../_dev/js/os.js',
-];
-
-const cssSources = [
-	'../_dev/css/tour.css'
-	// '../_dev/css/font.css'
-];
-
 async function readFile(url) {
 	const response = await fetch(url);
 	return await response.text();

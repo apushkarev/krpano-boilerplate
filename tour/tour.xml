@@ -1,0 +1,9 @@
+﻿<krpano title="Virtual Tour">
+
+	<include url="../_app/include.xml%$_timestamp%" />
+
+	<preview type="grid(CUBE,16,16,512,0x333333,0x121314,0x000000);" />
+
+	<view fovmin="40" fovmax="100" fov="80" />
+	
+</krpano>

@@ -1,0 +1,19 @@
+<krpano>
+	
+	<action name="startup0" autorun="preinit">
+	
+		/* Надо для работы тура */
+		/* сохраняет алиас на объект krpano в js */
+		getKRPano();
+		/* делает нормальную консоль */
+		if (device.desktop,
+			js( setKRPanoConsole() );
+		);
+		/* парсит урл */
+		js( readURL() );
+		/* позволяет детектить окулус */
+		getOsVersion();
+		
+	</action>
+	
+</krpano>
