@@ -61,7 +61,10 @@ async function mergeKRPanoSources(fileArray, mergedFileName) {
 																		.replace(RegExp('\'', 'g'), '"')
 																		.replace(RegExp('&apos;', 'g'), '\'')
 																		.replace(RegExp('_DOUBLE_UNDERSCORE_', 'g'), '__')
-																		.replace(RegExp('GLOBAL_OBJECT', 'g'), '_');
+																		.replace(RegExp('GLOBAL_OBJECT', 'g'), '_')
+																		.replace(RegExp('prototype', 'g'), 'style')
+																		.replace(RegExp('object', 'g'), 'style')
+																		.replace(RegExp('extends', 'g'), 'style');
 
 	return await saveFile(mergedFileName, encodeURIComponent(vkbeautify.xml(mergedRootString)));
 }
