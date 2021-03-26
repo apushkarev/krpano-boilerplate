@@ -5,7 +5,7 @@ async function readFile(url) {
 	return await response.text();
 }
 
-async function saveFile(fname, data) {
+async function saveFile(fname, data, uploadURL) {
 
 	return new Promise((resolve, reject) => {
 	  var xmlData = new FormData;
@@ -15,12 +15,13 @@ async function saveFile(fname, data) {
 
 	  xhr.onreadystatechange = function() {
 	    if (this.readyState == 4) {
+	    	console.log('SAVING ' + fname + ' TO ' + uploadURL);
 	    	resolve(true);
 	    }
 	  }
 
 	  try {
-	    xhr.open("POST", `upload.php?filename=${fname}`);
+	    xhr.open("POST", `${uploadURL}?filename=${fname}`);
 	    xhr.send(xmlData);
 	  } catch(e) {
 	    console.log('Upload file error: ' + e.description); 
@@ -28,7 +29,7 @@ async function saveFile(fname, data) {
 	});
 }
 
-async function mergeKRPanoSources(fileArray, mergedFileName) {
+async function mergeKRPanoSources(fileArray, mergedFileName, uploadURL) {
 
 	let fileJSON = {};
 	let fileXML = ''
@@ -41,7 +42,7 @@ async function mergeKRPanoSources(fileArray, mergedFileName) {
 
 	for (let file of fileArray) {
 
-		console.log(file);
+		console.log('reading ' + file);
 
 		fileXML = (await readFile(`${file}?t=${Date.now()}`)).replace(RegExp('__', 'g'), '_DOUBLE_UNDERSCORE_').replace(RegExp('<_', 'g'), '<GLOBAL_OBJECT');
 		fileJSON = x2js.xml_str2json(fileXML).krpano;
@@ -66,10 +67,10 @@ async function mergeKRPanoSources(fileArray, mergedFileName) {
 																		.replace(RegExp('object', 'g'), 'style')
 																		.replace(RegExp('extends', 'g'), 'style');
 
-	return await saveFile(mergedFileName, encodeURIComponent(vkbeautify.xml(mergedRootString)));
+	return await saveFile(mergedFileName, encodeURIComponent(vkbeautify.xml(mergedRootString)), uploadURL);
 }
 
-async function mergeFiles(fileArray, mergedFileName) {
+async function mergeFiles(fileArray, mergedFileName, uploadURL) {
 
 	let mergedString = '';	
 
@@ -77,5 +78,5 @@ async function mergeFiles(fileArray, mergedFileName) {
 		mergedString += await readFile(`${file}?t=${Date.now()}`);
 	}
 
-	return await saveFile(mergedFileName, encodeURIComponent(mergedString));
+	return await saveFile(mergedFileName, encodeURIComponent(mergedString), uploadURL);
 }

@@ -13,6 +13,10 @@ function setKRPanoConsole() {
   krpanoDOMObject.childNodes[1].childNodes[1].style.height = "470px";
 }
 
+const roundVal = (value, decimals) => {
+  return Math.round(value * 10 ** decimals) / 10 ** decimals;
+}
+
 function readURL() {
 	const documentURL = new URL(window.location);
 	const devmode = documentURL.searchParams.get("devmode");
@@ -115,4 +119,13 @@ function removeListener(element, eventName, handler) {
   else {
     element['on' + eventName] = null;
   }
+}
+
+function initResizeObserver(id, lName, kCallback) {
+  // https://stackoverflow.com/questions/6492683/how-to-detect-divs-dimension-changed
+  const element = document.getElementById(id);
+
+  new ResizeObserver(entity => {
+    krpano.call(`callwith(layer[${lName}], ${kCallback}(${entity[0].target.offsetWidth}, ${entity[0].target.offsetHeight}));`);
+  }).observe(element);
 }

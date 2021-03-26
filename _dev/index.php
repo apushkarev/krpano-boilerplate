@@ -29,7 +29,7 @@
 	<script type="text/javascript" src="js/boilerplate_modules/vkbeautify.js"></script>
 
 	<script type="text/javascript" src="js/app.js?t=<?php echo time(); ?>"></script>
-	<script type="text/javascript" src="js/sources.js?t=<?php echo time(); ?>"></script>
+	<script type="text/javascript" src="js/build_sources.js?t=<?php echo time(); ?>"></script>
 
 </head>
 <body>
@@ -43,9 +43,9 @@
 		async function buildTour() {
 
 			// сборка файлов
-			await mergeKRPanoSources(krpanoSrc, '../_app/kml/app.xml');
-			await mergeFiles(jsSources, '../_app/js/js.js');
-			await mergeFiles(cssSources, '../_app/css/css.css');
+			await mergeKRPanoSources(krpanoSrc, '../_app/kml/app.xml', 'upload.php');
+			await mergeFiles(jsSources, '../_app/js/js.js', 'upload.php');
+			await mergeFiles(cssSources, '../_app/css/css.css', 'upload.php');
 
 			// получение ссылки на файл тура
 			const documentURL = new URL(window.location);
