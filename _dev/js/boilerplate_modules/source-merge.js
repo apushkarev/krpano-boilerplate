@@ -15,7 +15,7 @@ async function saveFile(fname, data, uploadURL) {
 
 	  xhr.onreadystatechange = function() {
 	    if (this.readyState == 4) {
-	    	console.log('SAVING ' + fname + ' TO ' + uploadURL);
+	    	console.log(`${Date().toString()}:: SAVED ${fname} TO ${uploadURL}`)
 	    	resolve(true);
 	    }
 	  }
@@ -75,6 +75,7 @@ async function mergeFiles(fileArray, mergedFileName, uploadURL) {
 	let mergedString = '';	
 
 	for (let file of fileArray) {
+		console.log('reading ' + file);
 		mergedString += await readFile(`${file}?t=${Date.now()}`);
 	}
 

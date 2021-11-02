@@ -29,7 +29,7 @@
 	<script type="text/javascript" src="js/boilerplate_modules/vkbeautify.js"></script>
 
 	<script type="text/javascript" src="js/app.js?t=<?php echo time(); ?>"></script>
-	<script type="text/javascript" src="js/build_sources.js?t=<?php echo time(); ?>"></script>
+	<script type="text/javascript" src="js/sources.js?t=<?php echo time(); ?>"></script>
 
 </head>
 <body>

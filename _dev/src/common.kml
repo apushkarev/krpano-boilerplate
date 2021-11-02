@@ -1,27 +1,5 @@
 <krpano>
 	
-	<action name="arrayPush" type="javascript"><![CDATA[
-
-		const [f, arrayName, arrayItemName] = args;
-
-		krpano.set(`${arrayName}[${arrayItemName}].name`, arrayItemName);
-		
-	]]></action>
-
-	<action name="getKRPano" type="javascript"><![CDATA[
-		window.krpano = krpano;	
-	]]></action>
-
-	<action name="removeArray">
-
-		if (%1,
-			for(calc(i, %1.count - 1), i GE 0, dec(i),
-				%1.removearrayitem(get(i));
-			);
-		);
-		
-	</action>
-	
 	<action name="extendKrpano" type="Javascript" autorun="preinit"><![CDATA[
 
 		/* krpano.inlinefunctions.hyphenate = function(str) {

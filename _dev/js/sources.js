@@ -1,6 +1,6 @@
 const krpanoSrc = [
 
-	'../_dev/src/devlib2.kml',
+	'../_dev/src/devlib3.kml',
 	'../_dev/src/startup.kml',
 	'../_dev/src/common.kml',
 	'../_dev/src/os.kml',
@@ -10,7 +10,7 @@ const krpanoSrc = [
 	// '../_dev/src/module_name/lov.kml',	
 	// '../_dev/src/module_name/objects.kml',	
 	// '../_dev/src/module_name/prototypes.kml',	
-	// '../_dev/src/module_name/structure.kml'
+	// '../_dev/src/module_name/layout.kml'
 ];
 
 const jsSources = [
@@ -20,6 +20,6 @@ const jsSources = [
 ];
 
 const cssSources = [
-	'../_dev/css/tour.css'
-	// '../_dev/css/font.css'
+	'../_dev/css/tour.css',
+	'../_dev/css/font.css'
 ];

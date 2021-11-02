@@ -129,3 +129,22 @@ function initResizeObserver(id, lName, kCallback) {
     krpano.call(`callwith(layer[${lName}], ${kCallback}(${entity[0].target.offsetWidth}, ${entity[0].target.offsetHeight}));`);
   }).observe(element);
 }
+
+function unobserve(id) {
+  if (window.resizeObserver) {
+    window.resizeObserver.unobserve(document.getElementById(`id`));
+    window.resizeObserver = null;
+  }
+}
+
+function kArrayPush(arrayName, arrayItemName, parameters) {
+
+  krpano.set(`${arrayName}[${arrayItemName}].name`, arrayItemName);
+
+  if (parameters) {
+    parameters.forEach(parameter => {
+      // console.log(`${arrayName}[${arrayItemName}].${parameter.name}` + ' ' + parameter.value);
+      krpano.set(`${arrayName}[${arrayItemName}].${parameter.name}`, parameter.value);    
+    });
+  }
+}
