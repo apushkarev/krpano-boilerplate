@@ -51,7 +51,7 @@
 			const documentURL = new URL(window.location);
 			const tourTitle = documentURL.searchParams.get("tour");
 			
-			let timestamp = +new Date;
+			const timestamp = Date.now().toString(36);
 
 			embedpano({
 				xml:`../${tourTitle}/tour.xml?t=` + timestamp, 

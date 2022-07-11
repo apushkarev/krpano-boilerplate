@@ -44,7 +44,7 @@ async function mergeKRPanoSources(fileArray, mergedFileName, uploadURL) {
 
 		console.log('reading ' + file);
 
-		fileXML = (await readFile(`${file}?t=${Date.now()}`)).replace(RegExp('__', 'g'), '_DOUBLE_UNDERSCORE_').replace(RegExp('<_', 'g'), '<GLOBAL_OBJECT');
+		fileXML = (await readFile(`${file}?t=${Math.round(Date.now()/1000).toString(36)}`)).replace(RegExp('__', 'g'), '_DOUBLE_UNDERSCORE_').replace(RegExp('<_', 'g'), '<GLOBAL_OBJECT');
 		fileJSON = x2js.xml_str2json(fileXML).krpano;
 
 		for (let key of Object.keys(fileJSON)) {
@@ -76,7 +76,7 @@ async function mergeFiles(fileArray, mergedFileName, uploadURL) {
 
 	for (let file of fileArray) {
 		console.log('reading ' + file);
-		mergedString += await readFile(`${file}?t=${Date.now()}`);
+		mergedString += await readFile(`${file}?t=${Math.round(Date.now()/1000).toString(36)}`);
 	}
 
 	return await saveFile(mergedFileName, encodeURIComponent(mergedString), uploadURL);

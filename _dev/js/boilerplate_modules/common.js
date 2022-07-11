@@ -1,3 +1,9 @@
+const _now = () => window.performance.now();
+
+function roundVal(value, decimals) {
+  return Math.round(value * 10 ** decimals) / 10 ** decimals;
+}
+
 function setKRPanoConsole() {
 
   const krpanoDOMObject = document.getElementById('krpanoSWFObject');
@@ -147,4 +153,39 @@ function kArrayPush(arrayName, arrayItemName, parameters) {
       krpano.set(`${arrayName}[${arrayItemName}].${parameter.name}`, parameter.value);    
     });
   }
+}
+
+function injectCSS(css) {
+  const styleSheet = document.createElement("style")
+
+  styleSheet.type = "text/css"
+  styleSheet.innerText = css
+  document.body.appendChild(styleSheet)
+}
+
+function hexToRgb(hex) {
+  var result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex);
+  return result ? {
+    r: parseInt(result[1], 16),
+    g: parseInt(result[2], 16),
+    b: parseInt(result[3], 16)
+  } : null;
+}
+
+function componentToHex(c) {
+  var hex = c.toString(16);
+  return hex.length == 1 ? "0" + hex : hex;
+}
+
+function rgbToHex(r, g, b) {
+  return "#" + componentToHex(r) + componentToHex(g) + componentToHex(b);
+}
+
+function clipboard(content) {
+  const el = document.createElement('textarea');
+  el.value = content;
+  document.body.appendChild(el);
+  el.select();
+  document.execCommand('copy');
+  document.body.removeChild(el);
 }
