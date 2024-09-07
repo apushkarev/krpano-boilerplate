@@ -52,7 +52,7 @@ This file is entry point to launch tour and should contain all auto running acti
 
 ### `./_dev/js/common.js` 
 A file with some useful functions:
--`setCookie` and `getCookie` function to handle cookies,
+- `setCookie` and `getCookie` function to handle cookies,
 - `setKRPanoConsole` sets krpano console to more readable look, is called from startup.kml
 - `roundVal` JS function to round numbers. Difference from `toFixed` is `roundVal` returns number while `toFixed` returns string
 - `readURL` reads url keys and sets `krpano.is_bundler`,  `krpano.devmode`, `krpano.logkey`, `krpano.showerrors` variables
