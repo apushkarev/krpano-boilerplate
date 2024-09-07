@@ -20,12 +20,16 @@ Four ways to load the project:
 - `http://localhost:port/project_folder_name` will open tour from `tour` folder with latest bundled core
 
 ## How bundler works
-- bundler reads all .kml files from `./_dev/src` folder that is designated to kml code, merges them to one .xml file and saves to `./_app/xml/app.xml`. This file can be safely encrypted
+- bundler recursively reads all .kml files from `./_dev/src` folder that is designated to kml code, merges them to one .xml file and saves to `./_app/xml/app.xml`. This file can be safely encrypted
 - bundler reads all JS files from `./_dev/js` folder, merges them and saves to `./_app/js/js.js`
 - bundler reads all CSS files from `./_dev/CSS` folder, merges them and saves to `./_app/css/css.css`
 These three files represent core code and styles
 
 The `tour.xml` file should have `<include url="../_app/include.xml%$_timestamp%" />` include line in it to load core files
+
+For tour-specific kml code you can create and use `./tour/code_override` folder. Bundler will recursively read all .kml files from this folder and save to `./tour/bundle.xml`. 
+
+This bundled file should be included in `tour.xml` like this: `<include url="bundle.xml%$_timestamp%" />` strictly after including `_app/include.xml`
 
 ## Additional modules
 ### `./_dev/src/devlib4.kml` 
