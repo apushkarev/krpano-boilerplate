@@ -2,7 +2,7 @@
   
   <menu_list name="item1" caption="English" />
   <menu_list name="item2" caption="Arabic" />
-  <menu_list name="item3" caption="Spain" />
+  <menu_list name="item3" caption="Spanish" />
   <menu_list name="item4" caption="Chineese" />
   <menu_list name="item5" caption="Russian" />
   <menu_list name="item6" caption="French" />
