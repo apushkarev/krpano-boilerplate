@@ -13,7 +13,7 @@ This is a minimalistic demo project that uses bundler to create krpano apps
 - `index.php` on top level for running bundled code with tour from `tour` folder as default option
 
 ## Usage
-Four ways to load the project:
+Four ways to start the project:
 - `http://localhost:port/project_folder_name/_dev/?tour=tour` will run bundler and load tour from `tour` folder. **? tour=** key can take any folder with tour inside project folder
 - `http://localhost:port/project_folder_name/_dev` will run bundler and load tour from `tour` folder. A default option.
 - `http://localhost:port/project_folder_name/tour` will open tour from `tour` folder with latest bundled core.
@@ -52,6 +52,7 @@ This file is entry point to launch tour and should contain all auto running acti
 
 ### `./_dev/js/common.js` 
 A file with some useful functions:
+
 - `setCookie` and `getCookie` function to handle cookies,
 - `setKRPanoConsole` sets krpano console to more readable look, is called from startup.kml
 - `roundVal` JS function to round numbers. Difference from `toFixed` is `roundVal` returns number while `toFixed` returns string
