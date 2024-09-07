@@ -19,17 +19,7 @@ function getCookie(name) {
   return null;
 }
 
-function dumbMax(...args) {
-  const hName = args[0];
-    
-  const widthArray = args.slice(1);
-
-  for (let i = 0; i < widthArray.length; i++) {
-    widthArray[i] = +widthArray[i];
-  }
-
-  krpano.set(`hotspot[${hName}].max_width`, Math.max(...widthArray));
-}function setKRPanoConsole() {
+function setKRPanoConsole() {
 
   const krpanoDOMObject = document.getElementById('krpanoSWFObject');
 
@@ -55,9 +45,10 @@ function readURL() {
   krpano.is_bundler = location.href.indexOf('_dev') != -1;
 
 	if (devmode == '') {
-		krpano.set('devmode', true);
-		krpano.set('logkey', true);
-		krpano.set('showerrors', true);
+
+    krpano.devmode = true;
+    krpano.logkey = true;
+    krpano.showerrors = true;
 	}
 }
 
@@ -76,6 +67,16 @@ function loadjscssfile(filename, filetype, onload) {
   }
   if (typeof fileref != 'undefined')
     document.getElementsByTagName('head')[0].appendChild(fileref);
+}
+
+async function loadJSFile(path) {
+  return new Promise((resolve, reject) =>{
+    const script = document.createElement("script")
+    script.src = path
+    document.body.appendChild(script)
+
+    script.onload = () => resolve(script)
+  });
 }
 
 function hyphenate(text) {
@@ -110,6 +111,29 @@ function getRandomInt(min, max) {
   }
 }
 
+function suggestPassword() {
+
+  const passwordLength = 8;
+  const passwordSymbols = 'qwertyuiopasdfghjklzxcvbnmQWERTYUIOPASDFGHJKLZXCVBNM1234567890';
+
+  let pwd = '';
+
+  // the best way is the simplest
+  do {
+    pwd = '';
+    for (let i = 0; i < passwordLength; i++) {
+      pwd += passwordSymbols[getRandomInt(0, passwordSymbols.length - 1)];
+    }
+  } while (!testPassword(pwd));
+
+  return pwd;
+}
+
+function testPassword(pwd) {
+  let re = /(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}/;
+  return re.test(pwd);
+}
+
 function setPageRatio(ratio) {
 
   const panoFrame = document.getElementById('pano');
@@ -129,30 +153,6 @@ function setPageRatio(ratio) {
   }
 }
 
-function addListener(element, eventName, handler) {
-
-  if (element.addEventListener) {
-    element.addEventListener(eventName, handler, false);
-  }
-  else if (element.attachEvent) {
-    element.attachEvent('on' + eventName, handler);
-  }
-  else {
-    element['on' + eventName] = handler;
-  }
-}
-
-function removeListener(element, eventName, handler) {
-  if (element.addEventListener) {
-    element.removeEventListener(eventName, handler, false);
-  }
-  else if (element.detachEvent) {
-    element.detachEvent('on' + eventName, handler);
-  }
-  else {
-    element['on' + eventName] = null;
-  }
-}
 
 function initResizeObserver(id, lName, kCallback) {
   // https://stackoverflow.com/questions/6492683/how-to-detect-divs-dimension-changed
@@ -248,6 +248,27 @@ function degToRad(angle) {
 function radToDeg(angle) {
   return angle * 180 / Math.PI;
 }
+
+const uiTimeout = (callback) => {
+  setTimeout(() => callback(), 75);
+}
+
+const getTimestamp = () =>  Math.round(Date.now() / 1000).toString(36);
+
+const slowCallwhen = (condition, callback) => {
+
+  const intervalId = setInterval(async () => {
+
+    if (await condition()) {
+
+      clearInterval(intervalId)
+      await callback()
+    }
+  }, 50)
+
+  return intervalId
+}
+
 /**
 * vkBeautify - javascript plugin to pretty-print or minify text in XML, JSON, CSS and SQL formats.
 *  

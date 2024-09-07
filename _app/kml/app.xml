@@ -1,4 +1,4 @@
-<krpano ui_reaction_delay="0.075">
+<krpano ui_reaction_delay="0.075" debugjsactions="true">
 	<action name="extend_krpano" type="Javascript" autorun="preinit">
 		<![CDATA[ /* krpano.inlinefunctions.hyphenate = function(str) { return hyphenate(str); }; krpano.inlinefunctions.getrandomint = function(min, max) { return getRandomInt(min, max); }; krpano.inlinefunctions.elemexists = (e) => document.getElementById(e) != null; krpano.inlinefunctions.exists = (e) => e != null; */ ]]>
 	</action>
@@ -42,5 +42,5 @@
 	<action name="" type="javascript" autorun="preinit">
 		<![CDATA[ window.setMenuItemCSS = lName => { const layer = krpano.layer.getItem(lName); layer.css = ` color: #${krpano.get(`design.text_color`)}; font-family: Open Sans; font-size: 20px; font-weight: 300; line-height: ${+krpano.get(`design.menu_item_height`) - 6}px; padding-left: ${krpano.get(`design.padding`)}px; `; }; ]]>
 	</action>
-	<action name="startup0" autorun="preinit">/* Надо для работы тура */ /* делает нормальную консоль */ if (device.desktop, js( setKRPanoConsole() ); ); /* парсит урл */ js( readURL() ); delayedcall (0.5, callwith(layer[menu_button_background], show); ); menu.create_items();</action>
+	<action name="startup0" autorun="preinit">if (device.desktop, js( setKRPanoConsole() ); ); js( readURL() ); delayedcall (0.5, callwith(layer[menu_button_background], show); ); menu.create_items();</action>
 </krpano>

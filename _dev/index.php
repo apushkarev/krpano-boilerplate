@@ -28,7 +28,7 @@
 </head>
 <body>
 
-<script src="../_app/tour.js"></script>
+<script src="../_app/tour.js?t=<?php echo base_convert(time(),10,36); ?>"></script>
 
 <script>
 
