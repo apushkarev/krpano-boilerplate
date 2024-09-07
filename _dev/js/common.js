@@ -1,9 +1,3 @@
-const _now = () => window.performance.now();
-
-function roundVal(value, decimals) {
-  return Math.round(value * 10 ** decimals) / 10 ** decimals;
-}
-
 function setKRPanoConsole() {
 
   const krpanoDOMObject = document.getElementById('krpanoSWFObject');
@@ -26,6 +20,8 @@ const roundVal = (value, decimals) => {
 function readURL() {
 	const documentURL = new URL(window.location);
 	const devmode = documentURL.searchParams.get("devmode");
+
+  krpano.is_bundler = location.href.indexOf('_dev') != -1;
 
 	if (devmode == '') {
 		krpano.set('devmode', true);
@@ -102,30 +98,6 @@ function setPageRatio(ratio) {
   }
 }
 
-function addListener(element, eventName, handler) {
-
-  if (element.addEventListener) {
-    element.addEventListener(eventName, handler, false);
-  }
-  else if (element.attachEvent) {
-    element.attachEvent('on' + eventName, handler);
-  }
-  else {
-    element['on' + eventName] = handler;
-  }
-}
-
-function removeListener(element, eventName, handler) {
-  if (element.addEventListener) {
-    element.removeEventListener(eventName, handler, false);
-  }
-  else if (element.detachEvent) {
-    element.detachEvent('on' + eventName, handler);
-  }
-  else {
-    element['on' + eventName] = null;
-  }
-}
 
 function initResizeObserver(id, lName, kCallback) {
   // https://stackoverflow.com/questions/6492683/how-to-detect-divs-dimension-changed
@@ -189,3 +161,56 @@ function clipboard(content) {
   document.execCommand('copy');
   document.body.removeChild(el);
 }
+
+function getAngularDistance(pointA, pointB) {
+  const a = ((pointA % 360) + 360) % 360; // calculate the angular value of pointA modulo 360 degrees
+  const b = ((pointB % 360) + 360) % 360; // calculate the angular value of pointB modulo 360 degrees
+
+  const clockwiseDistance = (b - a + 540) % 360 - 180; // calculate the clockwise distance between the two points modulo 360 degrees
+  const counterclockwiseDistance = (a - b + 540) % 360 - 180; // calculate the counterclockwise distance between the two points modulo 360 degrees
+
+  return Math.abs(Math.min(clockwiseDistance, counterclockwiseDistance)); // return the absolute value of the smaller of the two distances
+}
+
+function normalizeAngle360(angle) {
+  return ((angle % 360) + 360) % 360;
+}
+
+function normalizeAngle180(angle) {
+  angle = (angle % 360 + 360) % 360;
+
+  if (angle > 180) {
+    angle -= 360;
+  }
+
+  return angle;
+}
+
+function degToRad(angle) {
+  return angle * Math.PI / 180;
+}
+
+function radToDeg(angle) {
+  return angle * 180 / Math.PI;
+}
+
+const uiTimeout = (callback) => {
+  setTimeout(() => callback(), 75);
+}
+
+const getTimestamp = () =>  Math.round(Date.now() / 1000).toString(36);
+
+const slowCallwhen = (condition, callback) => {
+
+  const intervalId = setInterval(async () => {
+
+    if (await condition()) {
+
+      clearInterval(intervalId)
+      await callback()
+    }
+  }, 50)
+
+  return intervalId
+}
+

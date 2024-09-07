@@ -1,6 +1,8 @@
-<krpano>
+<krpano
+	ui_reaction_delay="0.1"
+>
 	
-	<action name="extendKrpano" type="Javascript" autorun="preinit"><![CDATA[
+	<action name="extend_krpano" type="Javascript" autorun="preinit"><![CDATA[
 
 		/* krpano.inlinefunctions.hyphenate = function(str) {
 			return hyphenate(str);

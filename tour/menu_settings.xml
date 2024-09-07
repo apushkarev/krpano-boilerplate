@@ -1,0 +1,13 @@
+<krpano>
+  
+  <menu_list name="item1" caption="Русский" />
+  <menu_list name="item2" caption="Белорусский" />
+  <menu_list name="item3" caption="Украинский" />
+  <menu_list name="item4" caption="Польский" />
+  <menu_list name="item5" caption="Латышский" />
+  <menu_list name="item6" caption="Эстонский" />
+  <menu_list name="item7" caption="Чешский" />
+  <menu_list name="item8" caption="Словенский" />
+  <menu_list name="item9" caption="Черногорский" />
+
+</krpano>

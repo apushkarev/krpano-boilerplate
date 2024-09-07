@@ -42,10 +42,17 @@ async function mergeKRPanoSources(fileArray, mergedFileName, uploadURL) {
 
 	for (let file of fileArray) {
 
-		console.log('reading ' + file);
+		// console.log('reading ' + file);
 
 		fileXML = (await readFile(`${file}?t=${Math.round(Date.now()/1000).toString(36)}`)).replace(RegExp('__', 'g'), '_DOUBLE_UNDERSCORE_').replace(RegExp('<_', 'g'), '<GLOBAL_OBJECT');
-		fileJSON = x2js.xml_str2json(fileXML).krpano;
+
+		let fileJSON = x2js.xml_str2json(fileXML)
+
+		if (!fileJSON) {
+			throw new Error(`KRPANO BUNDLER ERROR: XML PARSING FAILED IN ${file}`);
+		}
+
+		fileJSON = fileJSON.krpano;
 
 		for (let key of Object.keys(fileJSON)) {
 			if (key[0] == '_' && key.length > 1) {
@@ -65,6 +72,7 @@ async function mergeKRPanoSources(fileArray, mergedFileName, uploadURL) {
 																		.replace(RegExp('GLOBAL_OBJECT', 'g'), '_')
 																		.replace(RegExp('prototype', 'g'), 'style')
 																		.replace(RegExp('object', 'g'), 'style')
+																		.replace(RegExp('definition', 'g'), 'style')
 																		.replace(RegExp('extends', 'g'), 'style');
 
 	return await saveFile(mergedFileName, encodeURIComponent(vkbeautify.xml(mergedRootString)), uploadURL);
@@ -75,7 +83,7 @@ async function mergeFiles(fileArray, mergedFileName, uploadURL) {
 	let mergedString = '';	
 
 	for (let file of fileArray) {
-		console.log('reading ' + file);
+		
 		mergedString += await readFile(`${file}?t=${Math.round(Date.now()/1000).toString(36)}`);
 	}
 
