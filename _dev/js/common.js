@@ -1,3 +1,24 @@
+function setCookie(name, value, days) {
+  var expires = "";
+  if (days) {
+    var date = new Date();
+    date.setTime(date.getTime() + (days * 24 * 60 * 60 * 1000));
+    expires = "; expires=" + date.toUTCString();
+  }
+  document.cookie = name + "=" + (value || "") + expires + "; path=/";
+}
+
+function getCookie(name) {
+  var nameEQ = name + "=";
+  var ca = document.cookie.split(';');
+  for (var i = 0; i < ca.length; i++) {
+    var c = ca[i];
+    while (c.charAt(0) == ' ') c = c.substring(1, c.length);
+    if (c.indexOf(nameEQ) == 0) return c.substring(nameEQ.length, c.length);
+  }
+  return null;
+}
+
 function setKRPanoConsole() {
 
   const krpanoDOMObject = document.getElementById('krpanoSWFObject');
@@ -24,9 +45,10 @@ function readURL() {
   krpano.is_bundler = location.href.indexOf('_dev') != -1;
 
 	if (devmode == '') {
-		krpano.set('devmode', true);
-		krpano.set('logkey', true);
-		krpano.set('showerrors', true);
+
+    krpano.devmode = true;
+    krpano.logkey = true;
+    krpano.showerrors = true;
 	}
 }
 
@@ -45,6 +67,16 @@ function loadjscssfile(filename, filetype, onload) {
   }
   if (typeof fileref != 'undefined')
     document.getElementsByTagName('head')[0].appendChild(fileref);
+}
+
+async function loadJSFile(path) {
+  return new Promise((resolve, reject) =>{
+    const script = document.createElement("script")
+    script.src = path
+    document.body.appendChild(script)
+
+    script.onload = () => resolve(script)
+  });
 }
 
 function hyphenate(text) {
@@ -77,6 +109,29 @@ function getRandomInt(min, max) {
   } else {
     return Math.floor(Math.random() * (max - min)) + min;
   }
+}
+
+function suggestPassword() {
+
+  const passwordLength = 8;
+  const passwordSymbols = 'qwertyuiopasdfghjklzxcvbnmQWERTYUIOPASDFGHJKLZXCVBNM1234567890';
+
+  let pwd = '';
+
+  // the best way is the simplest
+  do {
+    pwd = '';
+    for (let i = 0; i < passwordLength; i++) {
+      pwd += passwordSymbols[getRandomInt(0, passwordSymbols.length - 1)];
+    }
+  } while (!testPassword(pwd));
+
+  return pwd;
+}
+
+function testPassword(pwd) {
+  let re = /(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}/;
+  return re.test(pwd);
 }
 
 function setPageRatio(ratio) {
