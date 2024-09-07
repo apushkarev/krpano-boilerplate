@@ -1,3 +1,4 @@
+
 # KRPano Bundler Project
 ## Description
 
@@ -31,6 +32,102 @@ For tour-specific kml code you can create and use `./tour/code_override` folder.
 
 This bundled file should be included in `tour.xml` like this: `<include url="bundle.xml%$_timestamp%" />` strictly after including `_app/include.xml`
 
+## Syntax updates and code style notes
+
+Bundler logic splits krpano `style` array into three new entities for semantic convenience
+- `prototype`,
+- `definition`,
+- `extends`
+
+Bundler will rename all these tags back to `style` when creating app.xml
+See `./_dev/src/menu` folder for how they are implemented in-situ
+
+Key takes:
+- `definition` field and tag is used to separate layer hierarchy from layer definitions (see `./_dev/src/menu/layout.kml` and `./_dev/src/menu/definitions.kml`)
+
+Naming convention for layers, hotspots and definitions: snake witl all lowercase letters: `some_object_name`
+
+- `extends` field is used in layer or hotspot definitions to explicitly state what prototypes does an object inherit. Please don't use `extends` inside `prototype` tag
+
+Examples:
+`layout.kml`:
+
+    <layer name="menu_button_background" definition="menu_button_background">
+      <layer name="menu_button_bar1" definition="menu_button_bar1"/>    
+      <layer name="menu_button_bar2" definition="menu_button_bar2"/>    
+      <layer name="menu_button_bar3" definition="menu_button_bar3"/>    
+      <layer name="menu_button_touch_area" definition="menu_button_touch_area"/>
+    </layer>  
+`definition.kml`:
+
+    <definition name="menu_button_background" extends="Invisible_Content|Visible" keep="true"
+      extends field used to describe prototypes to be inherited
+      all layer or hotspot stuff goes here
+    />
+
+- `prototype` is a tag designated to object prototypes (can be hotspot or layer)
+Naming convention for prototype names: snake with capital letters for each word: `Some_Prototype_Name`
+
+Examples: 
+
+Just a set of properties:
+
+    <prototype name="Button_Bar"
+        type="container" 
+    
+        height="2"
+        bgroundedge="1"
+    
+        bgcolor="calc:'0x' + design.text_color"
+        bgalpha="1"
+      />
+
+A prototype with constructor:
+
+    <prototype name="Some_Prototype"
+      type="container" 
+    
+      height="2"
+      bgroundedge="1"
+    
+      bgcolor="calc:'0x' + design.text_color"
+      bgalpha="1"
+    
+      Some_Prototype="
+    
+        newlayer(%1, %2);
+        /* or newhotspot(%1, %2); */
+    
+        /* %3 - parameter description */
+        /* %4 - parameter description */
+        /* ... */
+        /* %n - parameter description */
+      
+      /*
+        constructor is not called from this object scope,
+        so to access current object fields 'this' alias is required
+      */
+        set(this.some_param_1, %3);
+        set(this.some_param_2, %4);
+        /* ... */
+        set(this.some_param_n, %n);
+    
+        /* all other constructor stuff */
+      "
+    />
+
+Creating a new object from krpano action using `new` function:
+
+    new(Invisible_Content|Visible|Some_Prototype,
+        'some_new_object_name',
+        some_param_1_value,
+        some_param_2_value,
+        /* ... */
+        some_param_n_value,
+      );
+
+All prototypes that will be inherited by new object are given in the first argument. See `./_dev/src/menu/module.kml` for in-sity implementation
+
 ## Additional modules
 ### `./_dev/src/devlib4.kml` 
 A developer library that contains the following actions and prototypes:
@@ -39,8 +136,11 @@ A developer library that contains the following actions and prototypes:
 - `remove_array(array_name)` kml action that removes all items from array named array_name
 - anonymous function to set `window.krpano` global variable in window object so all krpano functionality becomes available anywhere in JS code
 - `window._k` object with a lot of useful abbreviations for window.krpano object internal methods
-- `Invisible_Content` prototype to handle krpano objects (hotspot, layer, plugin) visibility with lots useful methods allowing to build interactions related to visibility. Makes object invisible by default
+- `Invisible_Content` prototype to handle krpano objects (hotspot, layer, plugin) visibility with lots useful methods allowing to build interactions related to visibility. Makes object invisible by default.
 - `Visible` prototype paired with `Invisible_Content` will make an inheriting object visible by default
+
+*Invisible_Content and Visible prototypes should go first in prototype list*
+
 - `new` action to create new objects from prototypes (requires constructor method in prototype, constructor name should be equal to prototype name)
 - `newhotspot` and `newlayer` actions to create new objects, should be used inside constructor, see implementation in `./_dev/src/menu/prototypes.kml`
 
