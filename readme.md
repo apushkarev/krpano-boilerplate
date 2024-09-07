@@ -19,6 +19,14 @@ Four ways to load the project:
 - `http://localhost:port/project_folder_name/tour` will open tour from `tour` folder with latest bundled core.
 - `http://localhost:port/project_folder_name` will open tour from `tour` folder with latest bundled core
 
+## How bundler works
+- bundler reads all .kml files from `./_dev/src` folder that is designated to kml code, merges them to one .xml file and saves to `./_app/xml/app.xml`. This file can be safely encrypted
+- bundler reads all JS files from `./_dev/js` folder, merges them and saves to `./_app/js/js.js`
+- bundler reads all CSS files from `./_dev/CSS` folder, merges them and saves to `./_app/css/css.css`
+These three files represent core code and styles
+
+The `tour.xml` file should have `<include url="../_app/include.xml%$_timestamp%" />` include line in it to load core files
+
 ## Additional modules
 ### `./_dev/src/devlib4.kml` 
 A developer library that contains the following actions and prototypes:
