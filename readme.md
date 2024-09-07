@@ -1,4 +1,5 @@
 
+
 # KRPano Bundler Project
 ## Description
 
@@ -45,7 +46,7 @@ See `./_dev/src/menu` folder for how they are implemented in-situ
 Key takes:
 - `definition` field and tag is used to separate layer hierarchy from layer definitions (see `./_dev/src/menu/layout.kml` and `./_dev/src/menu/definitions.kml`)
 
-Naming convention for layers, hotspots and definitions: snake witl all lowercase letters: `some_object_name`
+Naming convention for layers, hotspots and definitions: snake with all lowercase letters: `some_object_name`
 
 - `extends` field is used in layer or hotspot definitions to explicitly state what prototypes does an object inherit. Please don't use `extends` inside `prototype` tag
 
@@ -103,10 +104,13 @@ A prototype with constructor:
         /* ... */
         /* %n - parameter description */
       
-      /*
-        constructor is not called from this object scope,
-        so to access current object fields 'this' alias is required
-      */
+        /*
+          constructor is not called from this object scope,
+          so to access current object fields 'this' alias is required
+          
+          please keep in mind that 'this' is an alias and it can be overwritten
+          by other 'new' calls if they will appear later in the same call stack
+        */
         set(this.some_param_1, %3);
         set(this.some_param_2, %4);
         /* ... */
