@@ -19,6 +19,16 @@
     
   ]]></action>
 
+  <action name="remove_array">
+
+    if (%1,
+      for(set(i, calc(%1.count - 1)), i GE 0, dec(i),
+        %1.removearrayitem(get(i));
+      );
+    );
+    
+  </action>
+
   <action name="" type="javascript" autorun="preinit"><![CDATA[
   
     window.krpano = krpano;
@@ -67,16 +77,6 @@
     }
 
   ]]></action>
-
-  <action name="remove_array">
-
-    if (%1,
-      for(set(i, calc(%1.count - 1)), i GE 0, dec(i),
-        %1.removearrayitem(get(i));
-      );
-    );
-    
-  </action>
   
   <style name="Invisible_Content"
     visible="false" alpha="0"

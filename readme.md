@@ -133,20 +133,8 @@ Creating a new object from krpano action using `new` function:
 All prototypes that will be inherited by new object are given in the first argument. See `./_dev/src/menu/module.kml` for in-sity implementation
 
 ## Additional modules
-### `./_dev/src/devlib4.kml` 
-A developer library that contains the following actions and prototypes:
-- `get_this` puts krpano object (hotspot, layer or plugin) to `this` alias if called from this object scope. Takes no arguments.
-- `array_push(array_name, array_item_name)` kml action that adds new item with name = array_item_name to krpano array array_name.
-- `remove_array(array_name)` kml action that removes all items from array named array_name
-- anonymous function to set `window.krpano` global variable in window object so all krpano functionality becomes available anywhere in JS code
-- `window._k` object with a lot of useful abbreviations for window.krpano object internal methods
-- `Invisible_Content` prototype to handle krpano objects (hotspot, layer, plugin) visibility with lots useful methods allowing to build interactions related to visibility. Makes object invisible by default.
-- `Visible` prototype paired with `Invisible_Content` will make an inheriting object visible by default
+### [`./_dev/src/devlib4.kml`](https://github.com/apushkarev/Krpano-Developer-Library)
 
-*Invisible_Content and Visible prototypes should go first in prototype list*
-
-- `new` action to create new objects from prototypes (requires constructor method in prototype, constructor name should be equal to prototype name)
-- `newhotspot` and `newlayer` actions to create new objects, should be used inside constructor, see implementation in `./_dev/src/menu/prototypes.kml`
 
 ### `./_dev/src/common.kml` 
 A file designated to keep common actions and constants for app core. Contains template for creating krpano.inlinefunctions and `ui_reaction_delay` variable
