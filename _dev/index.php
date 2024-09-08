@@ -34,7 +34,6 @@
 
 	(async function buildTour() {
 
-		// получение ссылки на файл тура
 		const documentURL = new URL(window.location);
 
 		const tourTitle = documentURL.searchParams.get("tour") ?? 'tour';
@@ -44,7 +43,7 @@
 
 		window.tourLocation = `../`;
 
-		// сборка файлов
+		// bundling...
 		const t0 = performance.now();
 
 		const krpanoSrc = await fetch(`get_sources.php?folder=src&t=${timestamp}`).then(response => response.json());
@@ -55,10 +54,9 @@
 		await mergeFiles(jsSrc, '../_app/js/js.js', 'upload.php');
 		await mergeFiles(cssSrc, '../_app/css/css.css', 'upload.php');
 
-		// файлы тура
+		// code_override files
 		const tourSources = await fetch(`get_sources.php?folder=../${tourTitle}/code_override&t=${timestamp}`).then(response => response.json());
 		if (tourSources.length) {
-		  // после загрузки массива исходных файлов, к ним нужно добавить коррåектные пути
 		  await mergeKRPanoSources(tourSources.map((item) => `../${tourTitle}/${item}`), `../${tourTitle}/bundle.xml`, 'upload.php');
 		}
 

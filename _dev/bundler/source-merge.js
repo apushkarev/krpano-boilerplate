@@ -44,7 +44,9 @@ async function mergeKRPanoSources(fileArray, mergedFileName, uploadURL) {
 
 		// console.log('reading ' + file);
 
-		fileXML = (await readFile(`${file}?t=${Math.round(Date.now()/1000).toString(36)}`)).replace(RegExp('__', 'g'), '_DOUBLE_UNDERSCORE_').replace(RegExp('<_', 'g'), '<GLOBAL_OBJECT');
+		fileXML = (await readFile(`${file}?t=${Math.round(Date.now()/1000).toString(36)}`))
+		          .replace(RegExp('__', 'g'), '_DOUBLE_UNDERSCORE_')
+		          .replace(RegExp('<_', 'g'), '<GLOBAL_OBJECT');
 
 		let fileJSON = x2js.xml_str2json(fileXML)
 
@@ -66,14 +68,14 @@ async function mergeKRPanoSources(fileArray, mergedFileName, uploadURL) {
 	mergedRootString = x2js.json2xml_str(mergedRoot);
 	mergedRootString = mergedRootString.slice(0, -9) + mergedCode + mergedRootString.slice(-9);
 	mergedRootString = mergedRootString.replace(RegExp('[ \n\t]+', 'g'), ' ')
-																		.replace(RegExp('\'', 'g'), '"')
-																		.replace(RegExp('&apos;', 'g'), '\'')
-																		.replace(RegExp('_DOUBLE_UNDERSCORE_', 'g'), '__')
-																		.replace(RegExp('GLOBAL_OBJECT', 'g'), '_')
-																		.replace(RegExp('prototype', 'g'), 'style')
-																		.replace(RegExp('object', 'g'), 'style')
-																		.replace(RegExp('definition', 'g'), 'style')
-																		.replace(RegExp('extends', 'g'), 'style');
+																		 .replace(RegExp('\'', 'g'), '"')
+																		 .replace(RegExp('&apos;', 'g'), '\'')
+																		 .replace(RegExp('_DOUBLE_UNDERSCORE_', 'g'), '__')
+																		 .replace(RegExp('GLOBAL_OBJECT', 'g'), '_')
+																		 .replace(RegExp('prototype', 'g'), 'style')
+																		 .replace(RegExp('object', 'g'), 'style')
+																		 .replace(RegExp('definition', 'g'), 'style')
+																		 .replace(RegExp('extends', 'g'), 'style');
 
 	return await saveFile(mergedFileName, encodeURIComponent(vkbeautify.xml(mergedRootString)), uploadURL);
 }
