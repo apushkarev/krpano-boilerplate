@@ -1,5 +1,6 @@
 <krpano
 	debugjsactions="true"
+	version="1.0.1"
 >
 	
 	<action name="startup0" autorun="preinit">
