@@ -38,6 +38,7 @@
       a: () => krpano.actions,
 
       lgi: lName => krpano.layer.getItem(lName),
+      lga: () => krpano.layer.getArray(),
       pgi: pName => krpano.plugin.getItem(pName),
 
       hgi: hName => krpano.hotspot.getItem(hName),
@@ -45,6 +46,8 @@
 
       sgi: sName => krpano.scene.getItem(sName),
       sga: () => krpano.scene && krpano.scene.getArray(),
+
+      dgi: dName => krpano.data.getItem(dName).content,
 
       g: statement => krpano.get(statement),
 
@@ -64,6 +67,7 @@
 
       esi: () => krpano.embeddingsettings.initvars,
       esil: () => krpano.embeddingsettings.initvars._location,
+      esit: () => krpano.embeddingsettings.initvars._timestamp,
 
       vh: () => parseFloat(krpano.view.hlookat),
       vv: () => parseFloat(krpano.view.vlookat),
